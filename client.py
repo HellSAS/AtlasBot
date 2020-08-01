@@ -19,33 +19,34 @@ token = settings["TOKEN"] #Получаем токен из словаря setti
 prefix = commands.when_mentioned_or(settings["PREFIX"]) #Получаем префикс
 
 bot = commands.Bot(command_prefix = prefix) # Назначение префикса бота
-bot.remove_command("help")
+bot.remove_command("help") # Удаляет команду help
 # %help
 
 #Пока бот стартует и запускает всю систему
-@client.event
-async def on_connect():
-	print(f'{Fore.YELLOW}=========================')
-	print(f'Connection to discord.com')
-	print(f'Token: {token}')
-	print(f'ID: {client.user.id}')
-	print('Prefix: {prefix}')
-	print(f'{Fore.YELLOW}=========================')
+@client.event # Создаём событие 
+async def on_connect(): # Когда бот подключаеся 
+	print(f'{Fore.YELLOW}=========================') # Вывести жёлтую строку
+	print(f'Connection to discord.com') # Вывести "подключение к дискорду"
+	print(f'Token: {token}') # Вывести токен
+	print(f'ID: {client.user.id}') # Вывести id бота 
+	print('Prefix: {prefix}') # Вывести префикс бота
+	print(f'{Fore.YELLOW}=========================') # Вывести жёлтую строку
 
-	await self.client.change_presence(status = discord.Status.idle, activity = discord.Game(name = "Zzzzzz..."))
-
+	await self.client.change_presence(status = discord.Status.idle, activity = discord.Game(name = "Zzzzzz...")) # Вывести стаутс бота "Zzzzzz..."
+# При ПОДКЛЮЧЕНИИ бота выводит выжуню информацию и статус "Zzzzzz..." до полной готовности бота к работе.
+ 
 #Когда бот готов работать
-@client.event
-async def on_ready():
-	print(f'{Fore.GREEN}=========================')
-	print(f'Bot logged in as - ')
-	print(f'Username: {client.user.name}')
-	print(f'ID: {client.user.id}')
-	print(f'{Fore.GREEN}=========================')
+@client.event # Создаём событье 
+async def on_ready(): # Когда бот готов
+	print(f'{Fore.GREEN}=========================') # Вывести зелёную строку
+	print(f'Bot logged in as - ') # Вывести "Бот зарегестрирван как -"
+	print(f'Username: {client.user.name}') # Вывести имя бота
+	print(f'ID: {client.user.id}') # вывести id бота
+	print(f'{Fore.GREEN}=========================') # Вывести зелёную строку
 
-	a = randint(1,2)
+	a = randint(1,2) # Записываем в а рандомно 1 или 2 
 
-	if a == 1:
+	if a == 1: # Если а = 1
 		await self.client.change_presence(status = discord.Status.online, activity = discord.Game(name = prefix + config.gaming))
 
 		print("Bot playing!")
@@ -54,7 +55,7 @@ async def on_ready():
 
 		print("Bot listening invite!")
 
-@bot.command()  # разрешаем передавать агрументы
+@bot.command() 
 async def test(ctx, arg):  # создаем асинхронную фунцию бота
 	
 	await ctx.send(arg)  # отправляем обратно аргумент
