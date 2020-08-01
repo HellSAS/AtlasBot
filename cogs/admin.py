@@ -12,8 +12,8 @@ colorama.init()
 
 #create cog
 class admin(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
 
 	@commands.command(aliases = ['clear', 'c'])
     @commands.has_permissions(manage_messages = True)
@@ -88,7 +88,7 @@ class admin(commands.Cog):
             await member.send(embed=dm_msg)
 
 #setup
-def setup(client):
-    client.add_cog(status(client))
+def setup(bot):
+    bot.add_cog(status(bot))
 
         
